@@ -1,40 +1,47 @@
-const timerEl = document.querySelector("#timer")
-const startBtn = document.querySelector(".start")
+var timerEl = document.getElementById("time")
+var startBtn = document.getElementById("start")
 const endScreen = document.querySelector(".end-screen")
-const initial = document.querySelector(".initials")
+let initial = document.querySelector(".initials")
+let secondsLeft = 60;
 
-// create a function for timerEl that counts down from 70
-function countdown() {
-  var timeLeft = 70;
 
-  // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-  var timeInterval = setInterval(function () {
-    timeLeft--;
-    timerEl.textContent = timeLeft;
 
-    if (timeLeft === 0) {
-      timerEl.textContent = '';
-          clearInterval(timeInterval);
-        timerEl.textContent = "Times up!";
-    }
-  }, 1000);
+// when the start button is clicked the timer countdown starts
+function setTime() {
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timerEl.textContent = secondsLeft;
+  
+      if(secondsLeft === 0) {
+
+        clearInterval(timerInterval);
+      }
+  
+    }, 1000);
+  }
+
+// function to display questions
+function displayQuestion()  {
+   
+
 }
 
-//  function for collecting running tally of score in local storage
-
-//  function for collecting initials in local storage
+// when the start button is clicked the first questions appear on screen
 
 
+    startBtn.addEventListener("click", function()
+    {
+    setTime();
+    displayQuestion();
 
-
-// when the start button is clicked the timer starts and the first questions appears
-startBtn.addEventListener("click", function () {
-  countdown();
-  startScreen.classList.remove("hidden");
-  startScreen.classList.add("show");
-  initial.classList.remove("hidden");
-  initial.classList.add("show");
 });
+
+
+
+// when the start button is clicked the first set of questions is shown
+
+
+
 
 // 1 .On page load, hide the questions and end screen elements, and display the start screen element.
 // 2. When the start button is clicked:
