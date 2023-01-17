@@ -1,40 +1,99 @@
 var timerEl = document.getElementById("time")
 var startBtn = document.getElementById("start")
-const endScreen = document.querySelector(".end-screen")
+const endScreen = document.getElementById("end-screen")
 let initial = document.querySelector(".initials")
+let questionsEl = document.getElementById("questions")
 let secondsLeft = 60;
+var startScreen = document.getElementById("start-screen")
+var questionTitle = document.getElementById("question-title")
+var choices = document.getElementById("choices");
+var questionNumber = 0;
+var feedback = document.getElementById("feedback");
 
-
+// start quiz function
+function startQuiz() {
+  setTime();
+  displayQuestion();
+  startScreen.classList.add("hide");
+  questionsEl.classList.remove("hide");
+}
 
 // when the start button is clicked the timer countdown starts
 function setTime() {
-    var timerInterval = setInterval(function() {
-      secondsLeft--;
-      timerEl.textContent = secondsLeft;
-  
-      if(secondsLeft === 0) {
 
-        clearInterval(timerInterval);
-      }
-  
-    }, 1000);
+  var timerInterval = setInterval(function () {
+    secondsLeft--;
+    timerEl.textContent = secondsLeft;
+
+    if (secondsLeft === 0) {
+
+      clearInterval(timerInterval);
+    }
+
+  }, 1000);
+}
+
+
+function checkAnswer(event) {
+  console.log(event);
+  let answer = event.target.textContent;
+  if (answer === allQuestions[questionNumber].answer) {
+    feedback.textContent = "Correct";
+    feedback.classList.remove("hide");
+    feedback.classList.add("correct");
+    secondsLeft += 10;
+    setTimeout(function () {
+      feedback.classList.add("hide");
+      feedback.classList.remove("correct");
+
+    }, 2000);
+
   }
+  else {
+    feedback.textContent = "incorrect";
+    feedback.classList.remove("hide");
+    feedback.classList.add("incorrect");
+    secondsLeft -= 5;
+    setTimeout(function () {
+      feedback.classList.add("hide");
+      feedback.classList.remove("incorrect");
 
-// function to display questions
-function displayQuestion()  {
-   
+    }, 2000);
+  }
+  questionNumber++;
+  displayQuestion();
+}
+
+// // function to display questions
+function displayQuestion() {
+  //  for loop to display questions
+  if (questionNumber < allQuestions.length) {
+    choices.innerHTML = "";
+    questionTitle.textContent = allQuestions[questionNumber].question;
+    for (var i = 0; i < allQuestions[questionNumber].choices.length; i++) {
+      let button = document.createElement("button");
+      let text = allQuestions[questionNumber].choices[i];
+      button.textContent = text;
+      button.addEventListener('click', checkAnswer);
+      choices.appendChild(button);
+
+    }
+  } else {
+    endGame();
+  }
 
 }
 
+function endGame(){
+  endScreen.classList.remove("hide");
+    questionsEl.classList.add("hide");
+
+}
+
+
 // when the start button is clicked the first questions appear on screen
 
-
-    startBtn.addEventListener("click", function()
-    {
-    setTime();
-    displayQuestion();
-
-});
+startBtn.addEventListener("click", startQuiz);
 
 
 

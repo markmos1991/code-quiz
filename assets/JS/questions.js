@@ -1,12 +1,17 @@
-// multiple choice question that gives four options
-// question stored as an object with 1/4 true
-// const questions = 
 
 
-// local storage collects if user answer is true or false and adds to total score
+const allQuestions = [
+    {
+      question: "1 What is the keyword used to create a function in JavaScript?",
+      choices: ["function", "method", "procedure", "I choose you!!"],
+      answer: "function"
+    },
 
+    {
+        question: " 2 What is the keyword used to create a function in JavaScript?",
+        choices: ["function", "method", "procedure", "I choose you!!"],
+        answer: "function"
+      },
 
-// multiple choice question with correct answer and sound effect, and wrong answers with sound effects
-
-
-
+  ];
+  
