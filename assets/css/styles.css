@@ -86,3 +86,13 @@ li:nth-child(odd) {
   top: 10px;
   right: 10px;
 }
+
+
+.correct {
+   background-colour: green;
+}
+
+.incorrect {
+   
+  background-colour: rgb(128, 0, 0);
+}
